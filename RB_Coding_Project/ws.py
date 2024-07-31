@@ -3,7 +3,7 @@ import logging
 from  http.server import BaseHTTPRequestHandler, HTTPServer
 
 DEFAULT_FILE_CONFIG = "C:/Users/marxo/Documents/repos/spacetocreate/RB_Coding_Project/ws_config.json"
-DEFAULT_DIR_DATA_HTTPD = "C:/Users/marxo/Documents/repos/spacetocreate/cw_cs_python/data"
+DEFAULT_DIR_DATA_HTTPD = "C:/Users/marxo/Documents/repos/spacetocreate/RB_Coding_Project/data"
 
 def config_loadFromJson(fn=DEFAULT_FILE_CONFIG):
     jo = None
