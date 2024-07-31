@@ -2,8 +2,8 @@ import json
 import logging
 from  http.server import BaseHTTPRequestHandler, HTTPServer
 
-DEFAULT_FILE_CONFIG = "RB Coding Project/ws_config.json"
-DEFAULT_DIR_DATA_HTTPD = "cw_cs_python/data"
+DEFAULT_FILE_CONFIG = "C:/Users/marxo/Documents/repos/spacetocreate/RB Coding Project/ws_config.json"
+DEFAULT_DIR_DATA_HTTPD = "C:/Users/marxo/Documents/repos/spacetocreate/cw_cs_python/data"
 
 def config_loadFromJson(fn=DEFAULT_FILE_CONFIG):
     jo = None
@@ -85,10 +85,10 @@ class httpdHandler(BaseHTTPRequestHandler):
             self.do_ERR('[ERROR] 404 - Not Found (%s).' % sRequestedFile, 404)
 
 def httpd_start(serverIp='0.0.0.0', serverPort=8080):
-    global DEFAULT_DIR_DATA_HTTPD
-    DEFAULT_DIR_DATA_HTTPD = joConfig['dirDataHttpd']
+    #global DEFAULT_DIR_DATA_HTTPD
+    #DEFAULT_DIR_DATA_HTTPD = joConfig['dirDataHttpd']
     logging.basicConfig(level=logging.INFO)
-    logging.info('Starting httpd (%s:%s::%s)...\n' % (serverIp, serverPort, DEFAULT_DIR_DATA_HTTPD))
+    logging.info('Starting httpd (%s:%s)...\n' % (serverIp, serverPort))
     serverIpAndPort = (serverIp, serverPort)
     httpd = HTTPServer(serverIpAndPort, httpdHandler)
     try:
@@ -100,4 +100,5 @@ def httpd_start(serverIp='0.0.0.0', serverPort=8080):
 
 if __name__ == '__main__':
     joConfig = config_loadFromJson()
+#    print(joConfig)
     httpd_start(joConfig['serverIp'], int(joConfig['serverPort']))
