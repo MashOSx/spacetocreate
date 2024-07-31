@@ -2,8 +2,8 @@ import json
 import logging
 from  http.server import BaseHTTPRequestHandler, HTTPServer
 
-DEFAULT_FILE_CONFIG = 'RB Coding Project\ws_config.json'
-DEFAULT_DIR_DATA_HTTPD = 'cw_cs_python\data'
+DEFAULT_FILE_CONFIG = "RB Coding Project/ws_config.json"
+DEFAULT_DIR_DATA_HTTPD = "cw_cs_python/data"
 
 def config_loadFromJson(fn=DEFAULT_FILE_CONFIG):
     jo = None
