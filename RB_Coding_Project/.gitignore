@@ -1,0 +1,16 @@
+*.bin
+*.conf
+*.config
+*.creds
+*.env
+*.exe
+*.pwd
+*.pw
+*.pyc
+__pycache__
+.aws/
+.idea/
+config*.json
+creds.json
+junk.csv
+junk.txt

@@ -1,0 +1,14 @@
+{
+    "request": {
+        "host": "edu.2bitprogrammers.com",
+        "port": 443
+    },
+    "response": {
+        "data": {
+            "friends": {
+                "Chad": 0,
+                "Chloe": 1
+            }
+        }
+    }
+}
