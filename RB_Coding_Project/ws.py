@@ -3,7 +3,7 @@ import logging
 from  http.server import BaseHTTPRequestHandler, HTTPServer
 
 DEFAULT_FILE_CONFIG = "./ws_config.json"
-DEFAULT_DIR_DATA_HTTPD = "./data"
+DEFAULT_DIR_DATA_HTTPD = "./data/httpd"
 
 def config_loadFromJson(fn=DEFAULT_FILE_CONFIG):
     jo = None
@@ -15,7 +15,7 @@ def textFile_load(fn, baseDir=DEFAULT_DIR_DATA_HTTPD):
     sLines = None
     ## If this causes an error, try this instead: 
     #fnPath = ‘%s%s’ % (baseDir, fn)  ## Joins 2x strings without forward slash (i.e. filepath separator for linux) 
-    fnPath = '%s/%s' % (baseDir, fn) ## Joions 2x strings including forward slash (i.e. filepath separator for linux) 
+    fnPath = '%s/%s' % (baseDir, fn) ## Joins 2x strings including forward slash (i.e. filepath separator for linux) 
     try:
         with open(fnPath, 'r') as F:
             sLines = F.readlines()
@@ -75,17 +75,17 @@ class httpdHandler(BaseHTTPRequestHandler):
                 self.end_headers()
                 self.wfile.write(''.join(sLines).encode('utf-8'))
         elif sRequestedFile.endswith('.ico'): ## Return an icon (content-type=’image/png’)
-            sLines = textFile_load(sRequestedFile)
+            sLines = iconFile_load(sRequestedFile)
             if sLines != None:
                 self.send_response(200)
                 self.send_header('Content-type', 'image/png')
                 self.end_headers()
-                self.wfile.write(''.join(sLines).encode('utf-8'))
+                self.wfile.write(sLines)
         else:
             self.do_ERR('[ERROR] 404 - Not Found (%s).' % sRequestedFile, 404)
 
 def httpd_start(serverIp='0.0.0.0', serverPort=8080):
-    #global DEFAULT_DIR_DATA_HTTPD
+    #global DEFAULT_DIR_DATA_HTTPD //NOT A PART OF THE LOCAL FILE SYSTEM
     #DEFAULT_DIR_DATA_HTTPD = joConfig['dirDataHttpd']
     logging.basicConfig(level=logging.INFO)
     logging.info('Starting httpd (%s:%s)...\n' % (serverIp, serverPort))
@@ -100,5 +100,4 @@ def httpd_start(serverIp='0.0.0.0', serverPort=8080):
 
 if __name__ == '__main__':
     joConfig = config_loadFromJson()
-#    print(joConfig)
     httpd_start(joConfig['serverIp'], int(joConfig['serverPort']))
